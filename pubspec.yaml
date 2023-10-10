@@ -1,6 +1,6 @@
 name: aki_calendar_date_time_picker
 description: An easy date time picker from calendar and buttons
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/AKI-YU/aki_calendar_date_time_picker
 
 environment:
