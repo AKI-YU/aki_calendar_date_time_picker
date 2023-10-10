@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aki_calendar_datetime_picker/calendar/date_utils.dart';
+import 'package:aki_calendar_date_time_picker/calendar/date_utils.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> showCalendar(

@@ -1,4 +1,4 @@
-# AKI DateTime Picker
+# AKI Calendar DateTime Picker
 
 * A lightweight and calendar date time picker.
 
@@ -8,7 +8,7 @@
 
 AKI Calendar DateTime Picker widget:
 
-- `AKI DateTime Picker`, this widget can make a dialog with calendar and button list to help users to select date and time.
+- `AKI Calendar DateTime Picker`, this widget can make a dialog with calendar and button list to help users to select date and time.
 
 
 ### Installation
@@ -17,14 +17,14 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  aki_calendar_datetime_picker: ^0.0.1
+  aki_calendar_date_time_picker: ^0.0.1
 ```
 
 
 ## How to use
 
 ```dart
-import 'package:aki_calendar_datetime_picker/aki_calendar_datetime_picker.dart';
+import 'package:aki_calendar_date_time_picker/aki_calendar_date_time_picker.dart';
 ```
 
 ## basic use
