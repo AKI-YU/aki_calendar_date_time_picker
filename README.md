@@ -17,7 +17,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  aki_calendar_date_time_picker: ^0.0.1
+  aki_calendar_date_time_picker: ^0.0.2
 ```
 
 

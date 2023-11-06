@@ -1,6 +1,6 @@
 name: aki_calendar_date_time_picker
-description: An easy date time picker from calendar and buttons
-version: 0.0.2
+description: The aki calendar datetime picker is a powerful tool for apps that need advanced date and time selection. It combines a calendar view with a time picker, making it easy for users to choose dates and times. Its user-friendly design ensures smooth navigation, and developers can customize its appearance and behavior to fit their project. Whether you're scheduling appointments, managing events, or setting reminders, this component improves the usability and look of web applications, making it a valuable tool for creating intuitive date and time selection experiences.
+version: 0.0.3
 homepage: https://github.com/AKI-YU/aki_calendar_date_time_picker
 
 environment:
@@ -24,4 +24,14 @@ topics:
   - calendar
   - calendarpicker
   - calendardatetimepicker
-  
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+repository: https://github.com/AKI-YU/aki_calendar_date_time_picker/
+      
