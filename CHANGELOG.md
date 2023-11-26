@@ -1,5 +1,10 @@
 ## 0.0.3
 
+* add can Select Past Datetime judgement
+
+
+## 0.0.3
+
 * fix bugs - change days make hour/min reset 
 
 ## 0.0.2

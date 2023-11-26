@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'package:aki_calendar_date_time_picker/calendar/date_utils.dart';
 import 'package:flutter/material.dart';
 
-Future<dynamic> showCalendar(
-  BuildContext context, {
-  String title = "Choose Date & Time",
-  DateTime? currentDate,
-  CalHead? calHead,
-  CalCell? calCell,
-  TextConfig? textConfig,
-}) async {
+import 'calendar/date_utils.dart';
+
+Future<dynamic> showCalendar(BuildContext context,
+    {String title = "Choose Date & Time",
+    DateTime? currentDate,
+    CalHead? calHead,
+    CalCell? calCell,
+    TextConfig? textConfig,
+    bool canSelectPastDate = false}) async {
   return await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -21,7 +21,8 @@ Future<dynamic> showCalendar(
               w: MediaQuery.of(context).size.width - 80,
               calHead: calHead,
               calCell: calCell,
-              textConfig: textConfig),
+              textConfig: textConfig,
+              canSelectPastDate: canSelectPastDate),
           insetPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         );
       });
@@ -33,7 +34,8 @@ Widget calWidget(DateTime initDate,
     Color selectedColor = Colors.redAccent,
     CalHead? calHead,
     CalCell? calCell,
-    TextConfig? textConfig}) {
+    TextConfig? textConfig,
+    bool canSelectPastDate = false}) {
   StreamController<DateTime> sc = StreamController<DateTime>.broadcast();
   DateTime selectedDate = getUpperTime(initDate, timeUnit);
   ScrollController hourCtr =
@@ -87,7 +89,13 @@ Widget calWidget(DateTime initDate,
                 onTap: () {
                   selectedDate = intToDate(monthDate.year, monthDate.month, k,
                       h: initDate.hour, min: initDate.minute);
-                  sc.add(monthDate);
+                  if (selectedDate.isBefore(DateTime.now())) {
+                    if (canSelectPastDate) {
+                      sc.add(monthDate);
+                    }
+                  } else {
+                    sc.add(monthDate);
+                  }
                 },
                 child: Container(
                     width: (w != null) ? w / 7 : null,
@@ -104,7 +112,15 @@ Widget calWidget(DateTime initDate,
                       dayIdx.toString(),
                       style: isToday(monthDate.year, monthDate.month, dayIdx)
                           ? todayStyle
-                          : const TextStyle(fontWeight: FontWeight.normal),
+                          : TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: ((intToDate(monthDate.year,
+                                          monthDate.month, dayIdx)
+                                      .isBefore(DateTime.now())
+                                  ? ((!canSelectPastDate)
+                                      ? Colors.grey
+                                      : Colors.black)
+                                  : Colors.black))),
                     )))));
             dayIdx += 1;
           } else {
