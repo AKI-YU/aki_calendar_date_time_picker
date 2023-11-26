@@ -1,3 +1,8 @@
+## 0.0.6
+
+* update and make sure functionality
+
+
 ## 0.0.5
 
 * update and make sure functionality

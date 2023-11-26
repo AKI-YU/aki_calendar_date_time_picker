@@ -9,6 +9,7 @@ Future<dynamic> showCalendar(
   CalHead? calHead,
   CalCell? calCell,
   TextConfig? textConfig,
+  bool canSelectPastDate = false,
 }) async {
   return await showDialog(
       context: context,
@@ -21,7 +22,8 @@ Future<dynamic> showCalendar(
               w: MediaQuery.of(context).size.width - 80,
               calHead: calHead,
               calCell: calCell,
-              textConfig: textConfig),
+              textConfig: textConfig,
+              canSelectPastDate: canSelectPastDate),
           insetPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         );
       });
@@ -33,7 +35,8 @@ Widget calWidget(DateTime initDate,
     Color selectedColor = Colors.redAccent,
     CalHead? calHead,
     CalCell? calCell,
-    TextConfig? textConfig}) {
+    TextConfig? textConfig,
+    bool canSelectPastDate = false}) {
   StreamController<DateTime> sc = StreamController<DateTime>.broadcast();
   DateTime selectedDate = getUpperTime(initDate, timeUnit);
   ScrollController hourCtr =
@@ -86,8 +89,14 @@ Widget calWidget(DateTime initDate,
             row1.add(GestureDetector(
                 onTap: () {
                   selectedDate = intToDate(monthDate.year, monthDate.month, k,
-                      h: monthDate.hour, min: monthDate.minute);
-                  sc.add(monthDate);
+                      h: initDate.hour, min: initDate.minute);
+                  if (selectedDate.isBefore(DateTime.now())) {
+                    if (canSelectPastDate) {
+                      sc.add(monthDate);
+                    }
+                  } else {
+                    sc.add(monthDate);
+                  }
                 },
                 child: Container(
                     width: (w != null) ? w / 7 : null,
@@ -104,7 +113,15 @@ Widget calWidget(DateTime initDate,
                       dayIdx.toString(),
                       style: isToday(monthDate.year, monthDate.month, dayIdx)
                           ? todayStyle
-                          : const TextStyle(fontWeight: FontWeight.normal),
+                          : TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: ((intToDate(monthDate.year,
+                                          monthDate.month, dayIdx)
+                                      .isBefore(DateTime.now())
+                                  ? ((!canSelectPastDate)
+                                      ? Colors.grey
+                                      : Colors.black)
+                                  : Colors.black))),
                     )))));
             dayIdx += 1;
           } else {
@@ -126,7 +143,7 @@ Widget calWidget(DateTime initDate,
           hourArray.add(GestureDetector(
               onTap: () {
                 selectedDate = selectedDate.setHour(i);
-
+                monthDate.setHour(i);
                 sc.add(monthDate);
               },
               child: Container(
@@ -148,7 +165,7 @@ Widget calWidget(DateTime initDate,
           minArray.add(GestureDetector(
               onTap: () {
                 selectedDate = selectedDate.setMin(i);
-
+                monthDate.setMin(i);
                 sc.add(monthDate);
               },
               child: Container(
