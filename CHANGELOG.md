@@ -1,3 +1,7 @@
+## 0.0.7
+
+* upgrade because of intl 0.19.0
+
 ## 0.0.6
 
 * update and make sure functionality
